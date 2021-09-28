@@ -14,7 +14,11 @@ data = database.build_feature_mat(cuda=True)
 def face_retrieve(image_path: str, cuda=False, show=False):
     starttime = time.time()
     if cuda:
-        target = cp.asarray(feature_extract.extract(image_path)).swapaxes(1, 0)
+        try:
+            target = cp.asarray(feature_extract.extract(image_path)).swapaxes(1, 0)
+        except:
+            print('Extract features failed! Image path {}'.format(image_path))
+            return None
         stage1_time = time.time()
 
         sub = data - target
@@ -26,7 +30,11 @@ def face_retrieve(image_path: str, cuda=False, show=False):
         similar_index = cp.argsort(result, axis=0)[:3]  # get top-3 similar faces
         stage4_time = time.time()
     else:
-        target = np.asarray(feature_extract.extract(image_path)).swapaxes(1, 0)
+        try:
+            target = np.asarray(feature_extract.extract(image_path)).swapaxes(1, 0)
+        except:
+            print('Extract features failed! Image path {}'.format(image_path))
+            return None
         stage1_time = time.time()
 
         sub = data - target
@@ -42,7 +50,6 @@ def face_retrieve(image_path: str, cuda=False, show=False):
             stage4_time - starttime, stage1_time - starttime, stage2_time - stage1_time, stage3_time - stage2_time,
             stage4_time - stage3_time))
     if show:
-
         plt.subplot(2, 2, 1), plt.title('Original')
         image1 = Image.open(image_path)
         plt.imshow(image1), plt.axis('off')
@@ -67,3 +74,4 @@ if __name__ == '__main__':
     test_image = [os.path.join(basedir, '{:0>6}.jpg'.format(x)) for x in random.sample(range(0, 136719), 20)]
     for image in test_image:
         face_retrieve(image, cuda=True, show=True)
+    # face_retrieve(os.path.join(basedir, '000000.jpg'), cuda=True, show=True)
