@@ -23,7 +23,7 @@ def face_retrieve(image_path: str, cuda=False, show=False):
         result = cp.linalg.norm(sub, axis=0)
         stage3_time = time.time()
 
-        similar_index = cp.argsort(result, axis=0)[:4]  # get top-3 similar faces
+        similar_index = cp.argsort(result, axis=0)[:3]  # get top-3 similar faces
         stage4_time = time.time()
     else:
         target = np.asarray(feature_extract.extract(image_path)).swapaxes(1, 0)
@@ -35,7 +35,7 @@ def face_retrieve(image_path: str, cuda=False, show=False):
         result = np.linalg.norm(sub, axis=0)
         stage3_time = time.time()
 
-        similar_index = np.argsort(result, axis=0)[:4]  # get top-3 similar faces
+        similar_index = np.argsort(result, axis=0)[:3]  # get top-3 similar faces
         stage4_time = time.time()
     print(
         'Cost time:{}s, read image cost {}s, sub matrix cost {}s, calc distance cost {}s, data sort cost {}s.'.format(
@@ -43,20 +43,20 @@ def face_retrieve(image_path: str, cuda=False, show=False):
             stage4_time - stage3_time))
     if show:
 
-        plt.subplot(2, 2, 1), plt.title('Original(index:{})'.format(int(similar_index[0])))
-        image1 = Image.open(database.search_face_by_index(int(similar_index[0]))['filename'])
+        plt.subplot(2, 2, 1), plt.title('Original')
+        image1 = Image.open(image_path)
         plt.imshow(image1), plt.axis('off')
 
-        plt.subplot(2, 2, 2), plt.title('1(index:{})'.format(int(similar_index[1])))
-        image2 = Image.open(database.search_face_by_index(int(similar_index[1]))['filename'])
+        plt.subplot(2, 2, 2), plt.title('1(index:{})'.format(int(similar_index[0])))
+        image2 = Image.open(database.search_face_by_index(int(similar_index[0]))['filename'])
         plt.imshow(image2), plt.axis('off')
 
-        plt.subplot(2, 2, 3), plt.title('2(index:{})'.format(int(similar_index[2])))
-        image3 = Image.open(database.search_face_by_index(int(similar_index[2]))['filename'])
+        plt.subplot(2, 2, 3), plt.title('2(index:{})'.format(int(similar_index[1])))
+        image3 = Image.open(database.search_face_by_index(int(similar_index[1]))['filename'])
         plt.imshow(image3), plt.axis('off')
 
-        plt.subplot(2, 2, 4), plt.title('3(index:{})'.format(int(similar_index[3])))
-        image4 = Image.open(database.search_face_by_index(int(similar_index[3]))['filename'])
+        plt.subplot(2, 2, 4), plt.title('3(index:{})'.format(int(similar_index[2])))
+        image4 = Image.open(database.search_face_by_index(int(similar_index[2]))['filename'])
         plt.imshow(image4), plt.axis('off')
 
         plt.show()
