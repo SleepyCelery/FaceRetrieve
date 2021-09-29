@@ -33,13 +33,15 @@ Pytorch（推荐GPU版本）
 
 如果运行设备无NVIDIA GPU或未安装CUDA，需要在程序运行时把所有的cuda=True改为False
 
+矩阵运算一部分使用cupy库进行，如果通过pip编译安装失败，可以直接安装对应CUDA版本的二进制文件
+
 解压的特征数据库与人脸数据集的文件夹名称不要改动，并置于该项目文件夹下
 
 若运行facenet代码部分出现问题，请移步https://github.com/timesler/facenet-pytorch
 
 ###  参考项目
 
-[face_recognition]()(https://github.com/ageitgey/face_recognition)
+[face_recognition](https://github.com/ageitgey/face_recognition)
 
 [facenet-pytorch](https://github.com/timesler/facenet-pytorch)
 
