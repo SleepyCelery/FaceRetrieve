@@ -13,13 +13,14 @@ Pytorch（推荐GPU版本）
 ###  具体使用说明
 
 1. clone本仓库到本地
-2. 下载人脸图片数据集和人脸特征数据库到本地仓库目录（[特征数据库 提取码36q2](https://pan.baidu.com/s/1mrwpQ8H60vjlBXIQpSh29w)  [人脸数据集 提取码zbq8](https://pan.baidu.com/s/166wToy8ioTvns2YC5xSFJg )）
-3. 解压下载的两个压缩文件（保持文件夹原名）
-4. 下载安装mongodb，并把mongodb的bin目录置于环境变量中
-5. 安装CUDA（可选）
-6. 安装本项目所需要的第三方库，如使用anaconda，其自带库包含大部分所需
-7. 运行本地目录下start_mongodb.bat，启动特征数据库
-8. 运行项目的perf_test.py，程序会自动从人脸数据集中随机选择20张人脸并通过特征匹配得到这20张人脸的近似人脸
+2. clone [facenet-pytorch仓库](https://github.com/timesler/facenet-pytorch)到本仓库根目录下
+3. 下载人脸图片数据集和人脸特征数据库到本地仓库目录（[特征数据库 提取码36q2](https://pan.baidu.com/s/1mrwpQ8H60vjlBXIQpSh29w)  [人脸数据集 提取码zbq8](https://pan.baidu.com/s/166wToy8ioTvns2YC5xSFJg )）
+4. 解压下载的两个压缩文件（保持文件夹原名）
+5. 下载安装mongodb，并把mongodb的bin目录置于环境变量中
+6. 安装CUDA（可选）
+7. 安装本项目所需要的第三方库，如使用anaconda，其自带库包含大部分所需
+8. 运行本地目录下start_mongodb.bat，启动特征数据库
+9. 运行项目的perf_test.py，程序会自动从人脸数据集中随机选择20张人脸并通过特征匹配得到这20张人脸的近似人脸
 
 ###  实现效果
 

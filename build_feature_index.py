@@ -3,10 +3,11 @@ from facenet import MTCNN, InceptionResnetV1
 import os
 import database
 import time
+import torch
 
 total_num = 136719
 offset = 0
-device = 0
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 if __name__ == '__main__':
     mtcnn = MTCNN(image_size=160, margin=0, device=device)

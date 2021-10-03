@@ -21,7 +21,7 @@ def face_retrieve(image_path: str, cuda=False, show=False):
             return None
         stage1_time = time.time()
 
-        sub = data - target
+        sub = cp.subtract(data,target)
         stage2_time = time.time()
 
         result = cp.linalg.norm(sub, axis=0)
@@ -73,5 +73,5 @@ if __name__ == '__main__':
     basedir = './facesets'
     test_image = [os.path.join(basedir, '{:0>6}.jpg'.format(x)) for x in random.sample(range(0, 136719), 20)]
     for image in test_image:
-        face_retrieve(image, cuda=True, show=True)
+        face_retrieve(image, cuda=True, show=False)
     # face_retrieve(os.path.join(basedir, '000000.jpg'), cuda=True, show=True)
